@@ -6,166 +6,162 @@ $pass = "";
 $database = "solid";
 
 if(isset($_POST["submit_file"])){
-$selected_username = $_COOKIE["user_first_name"];
-$users_last_name = $_COOKIE["users_last_name"];
-move_uploaded_file($_FILES["file"]["tmp_name"],"../Profile_Pictures/".$_FILES["file"]["name"]);
-$connection_String = mysqli_connect($host,$user,$pass,$database);
-$myfiles = $_FILES["file"]["name"];
-$update_profile_query = "UPDATE users_table SET Profile_Picture = '$myfiles' WHERE user_fname = '$selected_username'AND user_lname ='$users_last_name' ";
-$execute_update_profile_query = mysqli_query($connection_String,$update_profile_query);
-
+    $selected_username = $_COOKIE["user_first_name"];
+    $users_last_name = $_COOKIE["users_last_name"];
+    move_uploaded_file($_FILES["file"]["tmp_name"],"../Profile_Pictures/".$_FILES["file"]["name"]);
+    $connection_String = mysqli_connect($host,$user,$pass,$database);
+    $myfiles = $_FILES["file"]["name"];
+    $update_profile_query = "UPDATE users_table SET Profile_Picture = '$myfiles' WHERE user_fname = '$selected_username'AND user_lname ='$users_last_name' ";
+    $execute_update_profile_query = mysqli_query($connection_String,$update_profile_query);
 }
+?>
 
- ?>
-<!--<!DOCTYPE html>-->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 
-    <!-- Importing bootstrap 3.0 and css -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-     <title>RHM CHAT</title>
+    <title>General Share</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
-    <link href="../css/style3.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../css/uploadify.css">
-    <link href="../css/general_share.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.knob.js"></script>
-    <script src="../js/jquery.ui.widget.js"></script>
-    <script src="../js/jquery.iframe-transport.js"></script>
-    <script src="../js/jquery.fileupload.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
     
-    <!-- Our main JS file -->
-    <script src="../js/script.js"></script>
-
-
+    <link href="css/style3.css" rel="stylesheet" />
+    <link href="css/genShare.css" rel="stylesheet">
+   
 </head>
 
 <body>
-  <!-- Top bar.....bread crumps -->
-<div class="nav main-header" id="top-navigation">
-<div id="top-navigation-logo">
-  <!-- Logo and Text on the Left Side of the Top bar -->
-<span>
-<!-- <img id="img-logo" src="../img/logo.png" alt="Logo"/> -->
-<a href="#" class="header_text"><p id="header-text" class="text-muted">RHM<span style="color:blue">CHat</span></p></a>
-</span>
-</div>
-<!-- Welcome and Username at the right side of the Top Bar -->
-<div id="top-navigation-username">
- <span id="my_profile_picture"></span>
-  <!-- Working with the dp -->
-<div id="dp_form_holder">
-<form method="post" action="" enctype="multipart/form-data">
-  <input type="file" name="file" id="file"/>
-  <input type="submit" name="submit_file" id="submit_file"/>
-</form>
-</div>
+    <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <br/>
+            <div id="top-navigation-username">
+                <span id="my_profile_picture"></span>
+                <!-- Working with the dp -->
+                <div id="dp_form_holder">
+                    <form method="post" action="" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file"/>
+                        <input type="submit" name="submit_file" id="submit_file"/>
+                    </form>
+                </div>
+                <span style="color:white;margin-top:3px"><strong><?php echo ($_COOKIE["user_first_name"]); ?></strong></span>
+            </div>
+            <br>
+            <ul class="sidebar-nav">
+                <li><a href="../Private_Message/Private_Message.php"><img src="../img/send-file.png" class="navimg img-responsive" /><span class="nav-writting">Private Chat</span></a></li>
+                <li><a href="../General_Message/General_Message.php"><img src="../img/chat-1.png" class="navimg img-responsive" /><span class="nav-writting">Public Chat</span></a></li>
+                <li><a style="border-left:4px solid rgba(69, 162, 255, 0.93); border-radius:10px" href="General_Share.php"><img src="../img/businessman.png" class="navimg img-responsive" /><span class="nav-writting">Public Share</span></a></li>
+                <li><a href="../General_announcement/general_announcement.php"><img src="../img/log-file-format-1.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements</span></a></li>
+                <li onclick="Logout()"><a href="../../index.php"><img src="../img/logout.png" class="navimg img-responsive" /><span class="nav-writting">Logout</span></a></li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-<span style="color:white; margin-top:3px"><em>Welcome,&nbsp;</em></span>
-<span style="margin-top:3px"><strong><?php echo ($_COOKIE["user_first_name"]); ?></strong></span>
-</div>
-</div>
-
-<!-- End Of Top Bar -->
-
-<div class="mycontainer">
-
-	<!-- Side bar begins -->
-
-    <div class="navigations">
-        <ul class="lists">
-            <!-- <li><a href="../Main_Dashboard.php"><img src="../img/dashboard.png" class="navimg img-responsive"/><span class="nav-writting">Dashboard</span></a></li> -->
-            <li><a href="../Private_Message/Private_Message.php"><img src="../img/send-file.png" class="navimg img-responsive" /><span class="nav-writting">Private Chat</span></a></li>
-            <li><a href="../General_Message/General_Message.php"><img src="../img/chat-1.png" class="navimg img-responsive" /><span class="nav-writting">Public Chat</span></a></li>
-            <li><a style="border-left:4px solid rgba(69, 162, 255, 0.93); border-radius:10px" href="General_Share.php"><img src="../img/businessman.png" class="navimg img-responsive" /><span class="nav-writting">Public Share</span></a></li>
-            <!-- <li><a href="../Private_Share/Private_Share.php"><img src="../img/remove-user.png" class="navimg img-responsive" /><span class="nav-writting">Private Share</span></a></li> -->
-            <li><a href="../General_announcement/general_announcement.php"><img src="../img/log-file-format-1.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements</span></a></li>
-            <li onclick="Logout()"><a href="../../index.php"><img src="../img/logout.png" class="navimg img-responsive" /><span class="nav-writting">Logout</span></a></li>
-        </ul>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <a href="#menu-toggle" class="btn btn-secondary btn-sm" id="menu-toggle"><i class="fas fa-bars"></i></a>
+          
+            <div class="container" id="main_content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class = "panel-body pbody">
+                            <form id="upload" method="post" action="upload.php" enctype="multipart/form-data">
+                                <div id="drop">
+                                    Drop Here(max~3MB)
+                                    <a>Browse</a>
+                                    <input type="file" name="upl" multiple hidden/>
+                                </div>
+                                <ul>
+                                    <!-- The file uploads will be shown here -->
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="side_bar_holder">
+                            <div class="designer">
+                                <div style="text-align:center;padding-top:15px"><span style="color:white;font-weight:bold">General Uploads<span>
+                                </div>
+                            </div>
+                        <div class="uploaded_container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+             
+        </div>
+        <!-- /#page-content-wrapper -->
     </div>
-
-    <!-- Side Bar Ends Here -->
-
-   <div class="main_content">
-      <div class="main_content_holder">
-      <div class = "panel panel-adjusted">
-       <div class = "panel-heading phead">
-        <h2 class = "panel-title ptitle"> General Share</h2>
-       </div>
-      <div class = "panel-body pbody">
-      <form id="upload" method="post" action="upload.php" enctype="multipart/form-data">
-        <div id="drop">
-            Drop Here(max~3MB)
-
-          <a>Browse</a>
-          <input type="file" name="upl" multiple />
-        </div>
-
-      <ul>
-        <!-- The file uploads will be shown here -->
-      </ul>
-
-    </form>
-
-          </div>
-        </div>
-
-         <div class="side_bar_holder">
-          <div class="designer">
-           <div style="text-align:center;padding-top:15px"><span style="color:white;font-weight:bold">General Uploads<span></div>
-          </div>
-          <div class="uploaded_container">
-        </div>
+    <!-- /#wrapper -->
+    
+    <!-- ClickDesk Live Chat Service for websites -->
+    <script type='text/javascript'>
+    var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyEgsSBXVzZXJzGICA4NftzOYIDA');
+    var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' : 
+    'http://my.clickdesk.com/clickdesk-ui/browser/');
+    var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+    var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; 
+    glcspt.async = true; glcspt.src = glcpath + 'livechat-new.js';
+    var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
+    </script>
+    <!-- End of ClickDesk -->
 
 
+    <!-- Bootstrap core JavaScript -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.knob.js"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script src="js/jquery.fileupload.js"></script>
+<!-- Our main JS file -->
+<script src="js/script.js"></script>
 
-          </div>
 
-        </div>
+    <!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").mouseover(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
 
-     </div>
 
-   </div>
-
-
-    <script>
-
+<script>
     $(document).ready(function(){
-
-      $("#my_profile_picture").load("Get_Profile_Picture.php");
-
-      $(" #my_profile_picture").click(function(){
-      $('#file').trigger("click");
-      });
-
-      $("#file").change(function(){
-        $("#submit_file").trigger("click");
-      });
-
-      $("#submit_file").click(function(){
-          $(this).submit();
-      });
-
+        $("#my_profile_picture").load("Get_Profile_Picture.php");
+        $(" #my_profile_picture").click(function(){
+            $('#file').trigger("click");
+        });
+        $("#file").change(function(){
+            $("#submit_file").trigger("click");
+        });
+        $("#submit_file").click(function(){
+            $(this).submit();
+        });
     });
 
     setInterval(function(){
-     $(".uploaded_container").load("uploaded.php");
-   },2000);
+        $(".uploaded_container").load("uploaded.php");
+    },2000);
+</script>
 
-
-    </script>
-
-    <script type="text/javascript">
+<script type="text/javascript">
     function Logout(){
-    $.get("../Logout/Logout.php");
+        $.get("../Logout/Logout.php");
     }
- </script>
+</script>
 
-  </body>
-  </html>
+</body>
+
+</html>

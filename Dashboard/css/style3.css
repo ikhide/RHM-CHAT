@@ -75,7 +75,7 @@ section, footer, header, aside{
 }
 
 #drop input{
-    display:none;
+    /* display:none; */
 }
 
 #upload ul{

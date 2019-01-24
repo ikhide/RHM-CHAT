@@ -1,132 +1,120 @@
-<!--<!DOCTYPE html>-->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 
-    <!-- Importing bootstrap 3.0, css and Javascript Files -->
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <!-- <link href="../css/bootstrap-theme.min.css" rel="stylesheet" /> -->
-    <link href="../css/style.css" rel="stylesheet" rel="stylesheet"/>
-    <link href="style.css" media="all" rel="stylesheet"/>
+    <title>RHM-CHAT</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/jquery.yacal.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
-
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.yacal.min.js"></script>
+    <link href="css/genStyle.css" rel="stylesheet">
 
 </head>
+
 <body>
-
-	<!-- Top bar.....bread crumps -->
-
-<div class="nav main-header" id="top-navigation">
-<div id="top-navigation-logo">
-
-  <!-- Logo and Text on the Left Side of the Top bar -->
-
-<span>
-<!-- <img id="img-logo" src="../img/logo.png" alt="Logo"/> -->
-<a href="#" class="header_text"> <p id="header-text" class="text-muted">RHM<span style="color:blue">CHat</span></p></a>
-</span>
-</div>
-
-<!-- Welcome and Username at the right side of the Top Bar -->
-<div id="top-navigation-username">
-
- <span id="my_profile_picture"></span>
-
-  <!-- Working with the dp -->
-<div id="dp_form_holder">
-<form method="post" action="" enctype="multipart/form-data">
-  <input type="file" name="file" id="file"/>
-  <input type="submit" name="submit_file" id="submit_file"/>
-</form>
-</div>
-
-<span style="color:white; margin-top:3px"><em>Welcome,&nbsp;</em></span>
-<span style="margin-top:3px"><strong><?php echo ($_COOKIE["user_first_name"]); ?></strong></span>
-</div>
-</div>
-
-<!-- End Of Top Bar -->
-
-<div class="mycontainer">
-
-	<!-- Side bar begins -->
-
-    <div class="navigations">
-        <ul class="lists">  
-        <!-- <li><a href="../Main_Dashboard.php"><img src="../img/dashboard.png" class="navimg img-responsive"/><span class="nav-writting">Dashboard</span></a></li>-->
-        <li><a href="../Private_Message/Private_Message.php"><img src="../img/send-file.png" class="navimg img-responsive" /><span class="nav-writting">Private Chat</span></a></li>
-        <li><a style="border-left:4px solid rgba(69, 162, 255, 0.93); border-radius:10px" href="General_Message.php"><img src="../img/chat-1.png" class="navimg img-responsive" /><span class="nav-writting">Public Chat</span></a></li>
-        <li><a href="../General_Share/General_Share.php"><img src="../img/businessman.png" class="navimg img-responsive" /><span class="nav-writting">Public Share</span></a></li>
-        <!-- <li><a href="../Private_Share/Private_Share.php"><img src="../img/remove-user.png" class="navimg img-responsive" /><span class="nav-writting">Private Share</span></a></li> -->
-        <li><a href="../General_announcement/general_announcement.php"><img src="../img/log-file-format-1.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements</span></a></li>
-        <li onclick="Logout()"><a href="../../index.php"><img src="../img/logout.png" class="navimg img-responsive" /><span class="nav-writting">Logout</span></a></li>
-      </ul>
-    </div>
-
-    <!-- Side Bar Ends Here -->
-
-    <!-- Main Content Starts Here -->
-
-        <div class="container-fluid" id="main_content">
-
-            <div style="display:none">
-              <form method="post" action="" enctype="multipart/form-data">
-                <input type="file" name="file" id="my_upload_file"/>
-                <input type="submit" name="upload_file" id="upload_file"/>
-              </form>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <br>
+            <div id="top-navigation-username">
+                <span id="my_profile_picture"></span>
+                <!-- Working with the dp -->
+                <div id="dp_form_holder">
+                    <form method="post" action="" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file"/>
+                        <input type="submit" name="submit_file" id="submit_file"/>
+                    </form>
+                </div>
+                <span style="color:white;margin-top:3px"><strong><?php echo ($_COOKIE["user_first_name"]); ?></strong></span>
             </div>
-
-      <div class="row">
-
-      <div id="Main_Chat_Box" class="col-md-8">
-        <br>
-        <div id="get_chatting_user_name">
-          <div style="font-weight:bold;font-size:1.2em;float:left;color:rgba(69, 162, 255, 0.93)">General Chats</div>
-          <br>
+            <br>
+            <ul class="sidebar-nav">
+                <li><a href="../Private_Message/Private_Message.php"><img src="../img/send-file.png" class="navimg img-responsive" /><span class="nav-writting">Private Chat</span></a></li>
+                <li><a style="border-left:4px solid rgba(69, 162, 255, 0.93); border-radius:10px" href="General_Message.php"><img src="../img/chat-1.png" class="navimg img-responsive" /><span class="nav-writting">Public Chat</span></a></li>
+                <li><a href="../General_Share/General_Share.php"><img src="../img/businessman.png" class="navimg img-responsive" /><span class="nav-writting">Public Share</span></a></li>
+                <li><a href="../General_announcement/general_announcement.php"><img src="../img/log-file-format-1.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements</span></a></li>
+                <li onclick="Logout()"><a href="../../index.php"><img src="../img/logout.png" class="navimg img-responsive" /><span class="nav-writting">Logout</span></a></li>
+            </ul>
         </div>
-        <hr>
-      <div id="get_chat_logs">
+        <!-- /#sidebar-wrapper -->
 
-
-      </div>
-
-      </div>
-
-      <div id="Right_side_bar" class="col-md-3">
-
-      </br>
-        <div><span class="right_side_logo"> Today <hr></span>
-          <div class="calendar"></div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <a href="#menu-toggle" class="btn btn-secondary btn-sm" id="menu-toggle"><i class="fas fa-bars"></i></a>
+            <div class="container-fluid"  id="main_content">
+                <div class="row">
+                    <!-- main chat -->
+                    <div id="Main_Chat_Box" class="col-md-8">           
+                        <br/>
+                        <div id="get_chatting_user_name">
+                            <div style="font-weight:bold;font-size:1.2em;float:left;color:rgba(69, 162, 255, 0.93)">General Chats</div>
+                            <br>
+                        </div>
+                        <hr>
+                        <div id="get_chat_logs">
+                        </div>
+                        <form action="" id="form_send_message" style="width:100%;background-color:white;height:40px;margin-top:10px;">
+                            <textarea id="text_area" placeholder="Type Something Here" style='width:92%; height:100%;'></textarea>
+                            <img src="../img/send.png" class='img-responsive' alt="Send Image" id="send_button" style='height:100%;margin-top:-30px;background-color:white;' />
+                            <button id="btn_Send" style='display:none;'></button>
+                        </form>
+                    </div>
+                    <!-- side calender -->
+                    <div id="Right_side_bar" class="col-md-3">
+                        <div>
+                            <span class="right_side_logo"> Today <hr></span>
+                            <div class="calendar"></div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div><span class="right_side_logo"> Uploads </span> <hr></div>
+                        <div id="get_uploads"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                </div>     
+            </div>
         </div>
-        <br>
-
-        <div><span class="right_side_logo"> Uploads </span> <hr></div>
-        <div id="get_uploads">
-
-      </div>
-
-      </div>
-
+        <!-- /#page-content-wrapper -->
     </div>
+    <!-- /#wrapper -->
 
-    </div>
+    <!-- ClickDesk Live Chat Service for websites -->
+    <script type='text/javascript'>
+    var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyEgsSBXVzZXJzGICA4NftzOYIDA');
+    var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' : 
+    'http://my.clickdesk.com/clickdesk-ui/browser/');
+    var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+    var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; 
+    glcspt.async = true; glcspt.src = glcpath + 'livechat-new.js';
+    var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
+    </script>
+    <!-- End of ClickDesk -->
 
-    <div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.yacal.min.js"></script>
 
-    <form action="" id="form_send_message">
-    <textarea id="text_area" placeholder="Type Something Here"></textarea><img src="../img/send.png" alt="Send Image" id="send_button"/>
-    <button id="btn_Send"></button>
-  </form>
-
-  </div>
-
-</div>
-  <?php
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").mouseover(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+ <?php
     $host = "localhost";
     $user = "root";
     $pass = "";
@@ -226,19 +214,8 @@
     });
    }
 
-   //function updateScroll(){
-     /*
-    $('#get_chat_logs').stop().animate({
-  scrollTop: $('#get_chat_logs')[0].scrollHeight
-}, 1000);
-*/
-//  };
-
-
     setInterval(get_messages,2000);
-  //  setInterval(updateScroll,1000);
-
-
+ 
     $("#send_button").hover(function(){
     $(this).attr("src","../img/send2.png");
           }, function() {
@@ -275,3 +252,4 @@
 
 </body>
 </html>
+

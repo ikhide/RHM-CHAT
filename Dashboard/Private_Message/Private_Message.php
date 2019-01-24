@@ -1,150 +1,99 @@
-<!--<!DOCTYPE html>-->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <!-- Importing bootstrap 3.0 and css -->
-  <meta charset="UTF-8" />
+  <title>RHM-CHAT</title>
 
-  <link href="../css/bootstrap.min.css" rel="stylesheet" />
-  <!-- <link href="../css/bootstrap-theme.min.css" rel="stylesheet" /> -->
-  <link href="../css/style.css" rel="stylesheet" />
-  <link href="css/Private_Chat_Style.css" rel="stylesheet"/>
-  <link href="../css/jquery.yacal.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
-  <title>RHM CHAT</title>
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  <style type="text/css">
-
-  .user_picture{
-    border-radius: 10px;
-    margin-top: 20px;
-    height: 120px;
-    width: 120px;
-    box-shadow: 3px 3px 3px;
-  }
-
-  #my_profile_holder{
-    float:left;
-  }
-
-  #details_holder{
-    float: right;
-    text-align: left;
-    margin-top: 25px;
-    margin-right: 40px;
-  }
-
-  .word-styling{
-    font-size: .8em;
-  }
-
-  .heading-style{
-    color:rgba(69, 162, 255, 0.93);
-    font-size: .8em;
-  }
-  body{
-    /* overflow:scroll; */
-  }
-
-  </style>
+  <!-- Custom styles for this template -->
+  <link href="css/privMessage.css" rel="stylesheet">
+ 
 </head>
 
 <body>
-	<!-- Top bar.....bread crumps -->
-  <div class="nav main-header" id="top-navigation">
-    <div id="top-navigation-logo">
-      <!-- Logo and Text on the Left Side of the Top bar -->
-      <span>
-        <!-- <img id="img-logo" src="../img/logo.png" alt="Logo"/> -->
-        <a href="#" class="header_text"><p id="header-text" class="text-muted">RHM<span style="color:blue">CHat</span></p></a>
-      </span>
-    </div>
-
-    <!-- Welcome and Username at the right side of the Top Bar -->
-    <div id="top-navigation-username">
-
-      <span id="my_profile_picture"></span>
-
-      <!-- Working with the dp -->
-      <div id="dp_form_holder">
-        <form method="post" action="" enctype="multipart/form-data">
-          <input type="file" name="file" id="file"/>
-          <input type="submit" name="submit_file" id="submit_file"/>
-        </form>
-      </div>
-
-      <span style="color:white; margin-top:3px"><em>Welcome,&nbsp;</em></span>
-      <span style="margin-top:3px"><strong><?php echo ($_COOKIE["user_first_name"]); ?></strong></span>
-    </div>
-  </div>
-
-<!-- End Of Top Bar -->
-
-  <div class="mycontainer">
-
-    <div class="container-fluid" id="main_content">
-
-      <div class="row">
-      <!-- Side bar begins -->
-
-      <div class="navigations col-md-2">
-        <ul class="lists">
-          <!-- <li><a href="../Main_Dashboard.php"><img src="../img/dashboard.png" class="navimg img-responsive"/><span class="nav-writting">Dashboard</span></a></li> -->
-          <li><a style="border-left:4px solid rgba(69, 162, 255, 0.93); border-radius:10px" href="Private_Message.php"><img src="../img/send-file.png" class="navimg img-responsive" /><span class="nav-writting">Private Chat</span></a></li>
-          <li><a href="../General_Message/General_Message.php"><img src="../img/chat-1.png" class="navimg img-responsive" /><span class="nav-writting">Public Chat</span></a></li>
-          <li><a href="../General_Share/General_Share.php"><img src="../img/businessman.png" class="navimg img-responsive" /><span class="nav-writting">Public Share</span></a></li>
-          <!-- <li><a href="../Private_Share/Private_Share.php"><img src="../img/remove-user.png" class="navimg img-responsive" /><span class="nav-writting">Private Share</span></a></li> -->
-          <li><a href="../General_announcement/general_announcement.php"><img src="../img/log-file-format-1.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements</span></a></li>
-          <li onclick="Logout()"><a href="../../index.php"><img src="../img/logout.png" class="navimg img-responsive" /><span class="nav-writting">Logout</span></a></li>
-        </ul>
-      </div>
-
-      <!-- Side Bar Ends Here -->
-
-      <!-- part two of row -->
-      
-      <div id="Get_Online_Users" class="col-md-1">
-
-      </div>
-
-      <!-- part three -->
-      <div id="Main_Chat_Box" class="col-md-6">
-        
-        <br>
-        <div id="get_chatting_user_name">
-          <div id="get_name" style="font-weight:bold;font-size:1.5em;float:left;color:rgba(69, 162, 255, 0.93)"></div>
-          <div style="float:right"><img src="../img/upload.png" id="btn_upload" style="cursor:hand;margin-right:15px; margin-top:-8px" height=35px width=35px title="Click here to upload file"/></div>
-          <br>
-        </div>
-        <hr>
-        
-        <div id="get_chat_logs"></div>
-
-        <!-- upload -->
-        <div style="margin-right:100px;" class="form-group">
-          <form method="post" action="" enctype="multipart/form-data" class="form">
-            <input style="display:none;" placeholder="Add file" type="file" name="file" id="my_upload_file"/>
-            <input style="display:none;" type="submit" name="upload_file" id="upload_file" class="btn btn-success btn-sm" hidden/>
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <br>
+      <div id="top-navigation-username">
+        <span id="my_profile_picture"></span>
+        <!-- Working with the dp -->
+        <div id="dp_form_holder">
+          <form method="post" action="" enctype="multipart/form-data">
+            <input type="file" name="file" id="file"/>
+            <input type="submit" name="submit_file" id="submit_file"/>
           </form>
         </div>
-
+        <span style="color:white;margin-top:3px"><strong><?php echo ($_COOKIE["user_first_name"]); ?></strong></span>
       </div>
-
-      <!-- part four -->
-      <div id="Right_side_bar" class="col-md-3">
-        <br>
-        <div class="sent"></div>
-      
-        </div>
-      <form method="post" action="Private_Message.php" id="form_send_message">
-        <textarea id="text_area" placeholder="Type Something Here" name="txtmessage"></textarea>
-        <img src="../img/send.png" alt="Send Image" id="send_button"/>
-        <input type="submit" name="send_message" value="" id="btn_Send"/>
-      </form>
-
+      <br>
+      <ul class="sidebar-nav">
+        <li><a style="border-left:4px solid rgba(69, 162, 255, 0.93); border-radius:10px" href="Private_Message.php"><img src="../img/send-file.png" class="navimg img-responsive" /><span class="nav-writting">Private Chat</span></a></li>
+        <li><a href="../General_Message/General_Message.php"><img src="../img/chat-1.png" class="navimg img-responsive" /><span class="nav-writting">Public Chat</span></a></li>
+        <li><a href="../General_Share/General_Share.php"><img src="../img/businessman.png" class="navimg img-responsive" /><span class="nav-writting">Public Share</span></a></li>
+        <li><a href="../General_announcement/general_announcement.php"><img src="../img/log-file-format-1.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements</span></a></li>
+        <li onclick="Logout()"><a href="../../index.php"><img src="../img/logout.png" class="navimg img-responsive" /><span class="nav-writting">Logout</span></a></li>
+      </ul>
     </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <a href="#menu-toggle" class="btn btn-secondary btn-sm" id="menu-toggle"><i class="fas fa-bars"></i></a>
+    
+      <div class="container" >
+        <div class="row">
+          <!-- part one of row -->
+          <div id="Get_Online_Users" class="col-md-2"></div>
+          <!-- part two -->
+          <div id="Main_Chat_Box" class="col-md-6">
+            <br>
+            <div id="get_chatting_user_name"></div>
+            <div id="get_name" style="font-weight:bold;font-size:1.5em;float:left;color:rgba(69, 162, 255, 0.93)"></div>
+            <div style="float:right"><img src="../img/upload.png" id="btn_upload" style="cursor:hand;margin-right:15px; margin-top:-8px" height=35px width=35px title="Click here to upload file"></div>
+            <br>
+            <hr>
+            <div id="get_chat_logs">
+            </div>
+
+            <div id="form_send_message" style="width:100%;background-color:white;height:40px;margin-top:10px;">
+              <textarea name="txtmessage" id="text_area" placeholder="Type Something Here" style='width:90%; height:100%;'></textarea>
+              <img src="../img/send.png" class='img-responsive' alt="Send Image" id="send_button" style='height:90%;margin-top:-30px;background-color:white;' />
+              <input type="submit" name="send_message" value="" id="btn_Send"/>
+            </div>
+
+            <!-- upload -->
+            <div style="margin-right:100px;" class="form-group" style="display:none;">
+              <form method="post" action="" enctype="multipart/form-data" class="form">
+                <input style="display:none;" placeholder="Add file" type="file" name="file" id="my_upload_file"/>
+                <input style="display:none;" type="submit" name="upload_file" id="upload_file" class="btn btn-success btn-sm" hidden/>
+              </form>
+            </div>
+
+          </div>
+
+          <!-- part three -->
+          <div id="Right_side_bar" class="col-md-4">
+            <br>
+            <div class="sent">
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
   </div>
+  <!-- /#wrapper -->
 
   <?php
 
@@ -155,18 +104,7 @@
 
     $connection_String = mysqli_connect($host,$user,$pass,$database);
 
-    if(isset($_POST["send_message"])){
-      if(!empty($_POST["txtmessage"])){
-        $messageSender = $_COOKIE["user_first_name"];
-        $newmessage = mysqli_real_escape_string($connection_String, $_POST["txtmessage"]);
-        $perfect_table = $_COOKIE["correctTable"];
-        $query = "INSERT INTO $perfect_table ( Usernames, Messages ) VALUES ('$messageSender','$newmessage')";
-        if($run = mysqli_query($connection_String,$query)){
-          echo "<embed loop='false' src='../General_Message/sound.wav' autoplay='true' hidden='false'/>";
-        };
-      };
-    };
-
+    // save profile pic
     if(isset($_POST["submit_file"])){
       $selected_username = $_COOKIE["user_first_name"];
       $users_last_name = $_COOKIE["users_last_name"];
@@ -177,7 +115,7 @@
       $execute_update_profile_query = mysqli_query($connection_String,$update_profile_query);
     };
 
-    // upload
+    // upload files
     if(isset($_POST['upload_file'])){
       $selected_username = $_COOKIE["user_first_name"];
 
@@ -196,70 +134,69 @@
       } else {
 
       // make file name in lower case
-    
       $final_file = preg_replace("#[^a-z0-9.]#i","",$file);
       $date = Date("Ymd_His");
       $final_file = $date."_".$_COOKIE["user_first_name"]."_".$final_file;
     
-      if(move_uploaded_file($file_loc,$folder.$final_file))
-      {
-      $selected_user_uploads_table = $_COOKIE["correct_Uploads_Table"];
-      $insert_query = "INSERT INTO $selected_user_uploads_table (`ID`, `File`, `Type`, `Size`) VALUES (NULL, '$final_file', '$file_type', '$new_size')";
-      $execute_insert_query = mysqli_query($connection_String,$insert_query);
+      $sender = $_COOKIE["user_first_name"];
+      $receiver = $_COOKIE["default_clicked_on_username"];
+      if(move_uploaded_file($file_loc,$folder.$final_file)){
+        $insert_query = "INSERT INTO private_uploads (`ID`, `File`, `Type`, `Size`,`sender`,`receiver`) VALUES (NULL, '$final_file', '$file_type', '$new_size','$sender','$receiver')";
+        $execute_insert_query = mysqli_query($connection_String,$insert_query);
+      }
     }
   }
-}
-  ?>
+?>
 
-<script src="../js/jquery-3.1.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 <script src="../js/jquery.yacal.min.js"></script>
+ <!-- Menu Toggle Script -->
+<script>
+  $("#menu-toggle").mouseover(function(e) {
+    e.preventDefault();
+    
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>
 
+<script>
 
-  <script type="text/javascript">
+  // onload functions
   $(document).ready(function(){
+    loadChat();
+    countChat();
+    dropScroll();
+    uploadHistory();
 
     $.ajax({
       cache:true,
       success:function(status){
-  setInterval(function(){
-      $("#Get_Online_Users").load("Online_Users.php"); // Add s to the #Get_Online_User to start ajax requests
-    },2000);
-  }
-  });
-
-    setInterval(function(){
-      $("#get_chat_logs").load("Chat_Log.php");    // Add x to the #Main_Chat_Bo to start ajax requests
-    },1000);
-
-  setInterval(function(){
-    $("#get_name").load("user_clicked_on.php");
-  },1000);
-
-  setInterval(function(){
-    $("#get_users_profile").load("get_users_profile.php");
-  },1000);
+        setInterval(function(){
+          $("#Get_Online_Users").load("Online_Users.php"); // Add s to the #Get_Online_User to start ajax requests
+        },3000);
+      }
+    });
+  
 
   $("#send_button").hover(function() {
-
-  $(this).attr("src","../img/send2.png");
-      }, function(){
-
-  $(this).attr("src","../img/send.png");
-  });
+    $(this).attr("src","../img/send2.png");
+  },function(){
+      $(this).attr("src","../img/send.png");
+    });
 
   $("#send_button").click(function(){
     $("#btn_Send").trigger("click");
   });
 
   $("#btn_Send").click(function(){
-    $(this).submit();
+    sendMessage();
   });
 
   $("#my_profile_picture").load("Get_Profile_Picture.php");
 
   $(" #my_profile_picture").click(function(){
-  $('#file').trigger("click");
+    $('#file').trigger("click");
   });
 
   $("#file").change(function(){
@@ -267,48 +204,132 @@
   });
 
   $("#submit_file").click(function(){
-      $(this).submit();
+    $(this).submit();
   });
 
   $("#submit_file").submit(function(){
-  $("#my_profile_picture").load("Get_Profile_Picture.php");
+    $("#my_profile_picture").load("Get_Profile_Picture.php");
   });
 
-  // upload
-   $(" #btn_upload").click(function(){
-    $('#my_upload_file').trigger("click");
+  // SEND FILES
+    $(" #btn_upload").click(function(){
+      $('#my_upload_file').trigger("click");
     });
 
     $("#my_upload_file").change(function(){
-    $("#upload_file").trigger("click");
+      $("#upload_file").trigger("click");
     });
 
     $("#upload_file").click(function(){
-        $(this).submit();
+      $(this).submit();
     });
 
     $("#upload_file").submit(function(){
-
       $("#get_uploads").load("uploaded.php");
-
     });
     
-    // upload history
-    setInterval(function(){
-     $(".sent").load("readUploaded.php");
-   },1000);
+
+  // TIMERS
+
+  // upload history
+
+  setInterval(function(){
+    uploadHistory();
+  },3000);
+
+  // load receiver username
+  setInterval(function(){
+    $("#get_name").load("user_clicked_on.php");
+  },1000);
 
 });
 
-  window.setTimeout(function() {
-     dropScroll();
-    }, 3000);
-    function dropScroll(){
-      $('#get_chat_logs').animate({ 
+  function dropScroll(){
+    $('#get_chat_logs').animate({ 
       scrollTop: $('#get_chat_logs').prop("scrollHeight")
+      // $('#get_chat_logs').scrollTop($('#get_chat_logs').scrollHeight);
     }, 1000);
+  }
 
-    }
+</script>
+
+
+<!-- new script -->
+
+<script>
+
+  function loadChat(){
+    $("#get_chat_logs").load("Chat_Log.php");   
+    dropScroll();
+  }
+
+   function countChat(){
+    setInterval(function(){
+      $.ajax({
+          url:'private_message_ajax.php',
+          method:'POST',
+          dataType: 'text',
+          data: {
+            key: 'countChat',
+          },success: function (response){
+            if(response !== localStorage.getItem('countxxxxxx') ){
+              loadChat();
+              dropScroll();
+              localStorage.setItem('countxxxxxx', response);
+          }
+        }
+      });
+    },2000);
+  }
+
+  function sendMessage(){
+    message = $("#text_area").val()
+      $.ajax({
+        url:'private_message_ajax.php',
+        method:'POST',
+        dataType: 'text',
+        data: {
+          key: 'sendMessage',
+          msg:message
+        },success: function (response){
+          $("#text_area").val(" ")
+          loadChat();
+          dropScroll();
+        }
+      });
+  }
+
+  function deleteUpload(file_name){
+    $.ajax({
+        url:'private_message_ajax.php',
+        method:'POST',
+        dataType: 'text',
+        data: {
+          key: 'deleteUpload',
+          file_name : file_name
+        },success: function (response){
+          alert(file_name +" has been deleted")
+      }
+    });
+  }
+
+  // delete chat
+  function deleteChat(id){
+      $.ajax({
+        url:'private_message_ajax.php',
+        method:'POST',
+        dataType: 'text',
+        data: {
+          key: 'deleteChat',
+          id: id
+        },success: function (response){
+			}
+		});
+  	}
+
+  function uploadHistory(){
+    $(".sent").load("readUploaded.php");
+  }  
 
 </script>
 

@@ -6,35 +6,33 @@ $pass = "";
 $database = "solid";
 
 if(isset($_POST["submit_file"])){
-$selected_username = $_COOKIE["user_first_name"];
-$users_last_name = $_COOKIE["users_last_name"];
-move_uploaded_file($_FILES["file"]["tmp_name"],"../Profile_Pictures/".$_FILES["file"]["name"]);
-$connection_String = mysqli_connect($host,$user,$pass,$database);
-$myfiles = $_FILES["file"]["name"];
-$update_profile_query = "UPDATE users_table SET Profile_Picture = '$myfiles' WHERE user_fname = '$selected_username'AND user_lname ='$users_last_name' ";
-$execute_update_profile_query = mysqli_query($connection_String,$update_profile_query);
-
+  $selected_username = $_COOKIE["user_first_name"];
+  $users_last_name = $_COOKIE["users_last_name"];
+  move_uploaded_file($_FILES["file"]["tmp_name"],"../Profile_Pictures/".$_FILES["file"]["name"]);
+  $connection_String = mysqli_connect($host,$user,$pass,$database);
+  $myfiles = $_FILES["file"]["name"];
+  $update_profile_query = "UPDATE users_table SET Profile_Picture = '$myfiles' WHERE user_fname = '$selected_username'AND user_lname ='$users_last_name' ";
+  $execute_update_profile_query = mysqli_query($connection_String,$update_profile_query);
 }
-
- ?>
+?>
 <!--<!DOCTYPE html>-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-    <!-- Importing bootstrap 3.0, css and Javascript Files -->
-    <meta charset="UTF-8" />
+  <!-- Importing bootstrap 3.0, css and Javascript Files -->
+  <meta charset="UTF-8" />
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/bootstrap-theme.min.css" rel="stylesheet"/>
-    <link href="../css/bootstrap-select.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet" rel="stylesheet"/>
-    <link href="general_announcement.css" media="all" rel="stylesheet"/>
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+  <link href="css/bootstrap-select.css" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet" rel="stylesheet"/>
+  <link href="css/general_announcement.css" media="all" rel="stylesheet"/>
 
 
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.yacal.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
+  <script type="text/javascript" src="js/jquery.yacal.min.js"></script>
 
 
 </head>
@@ -83,7 +81,7 @@ $execute_update_profile_query = mysqli_query($connection_String,$update_profile_
           <li><a href="../Private_Message/Private_Message.php"><img src="../img/send-file.png" class="navimg img-responsive" /><span class="nav-writting">Private Chat</span></a></li>
           <li><a href="../General_Message/General_Message.php"><img src="../img/chat-1.png" class="navimg img-responsive" /><span class="nav-writting">Public Chat</span></a></li>
           <li><a href="../General_Share/General_Share.php"><img src="../img/businessman.png" class="navimg img-responsive" /><span class="nav-writting">Public Share</span></a></li>
-          <!-- <li><a href="../General_Share/General_Share.php"><img src="../img/remove-user.png" class="navimg img-responsive" /><span class="nav-writting">Private Share</span></a></li> -->
+          <li><a href="../general_announcement2/general_announcement.php"><img src="../img/remove-user.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements2</span></a></li>
           <li><a style="border-left:4px solid rgba(69, 162, 255, 0.93); border-radius:10px" href="#"><img src="../img/log-file-format-1.png" class="navimg img-responsive" /><span class="nav-writting">General Announcements</span></a></li>
           <li onclick="Logout()"><a href="../../index.php"><img src="../img/logout.png" class="navimg img-responsive" /><span class="nav-writting">Logout</span></a></li>
         </ul>
@@ -105,25 +103,25 @@ $execute_update_profile_query = mysqli_query($connection_String,$update_profile_
     <div class="right-page">
       <br>
       <div style="text-align:center">
-      <span style="text-align:center;font-weight:bold">POST ANNOUNCEMENT</span>
-      <hr>
-    </div>
-
-    <form method="post" action="">
-      <div class="form-group">
-           <label for="txt_title" class="msg_title">Message Title</label>
-           <input type="text" class="form-control form-control-adjusted" id="txt_title" placeholder="Enter message title">
+        <span style="text-align:center;font-weight:bold">POST ANNOUNCEMENT</span>
+        <hr>
       </div>
-    <div class="form-group">
-      <label for="txt_announcement" class="msg_title">Message </label>
-      <textarea  class="form-control" id="txt_announcement" placeholder="Enter announcement here"></textarea>
+
+      <form method="post" action="">
+        <div class="form-group">
+          <label for="txt_title" class="msg_title">Message Title</label>
+          <input type="text" class="form-control form-control-adjusted" id="txt_title" placeholder="Enter message title">
+        </div>
+        <div class="form-group">
+          <label for="txt_announcement" class="msg_title">Message </label>
+          <textarea  class="form-control" id="txt_announcement" placeholder="Enter announcement here"></textarea>
+        </div>
+        <div class="form-group" id="btn_holder">
+          <button class="btn btn-primary" id="btn_post">Post</button>
+        </div>
+      </form>
     </div>
-    <div class="form-group" id="btn_holder">
-    <button class="btn btn-primary" id="btn_post">Post</button>
-    </div>
-  </form>
-    </div>
-    </div>
+  </div>
 
   <script>
   $(document).ready(function(){

@@ -25,12 +25,13 @@
     margin-right: 10px;
     margin-top: 13px;
     border: 2px solid rgba(0, 0, 0, 0.26);
-
   }
+
+
   </style>
  </head>
 
- <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+ <script type="text/javascript" src="js/jquery.min.js"></script>
 
 <?php
 
@@ -47,11 +48,12 @@ $execute_command_query = mysqli_query($connection_String,$command_query)or die(m
 
 $total_Users_Number = mysqli_fetch_assoc($execute_command_query);
 
-echo "</br>";
+echo "<br>";
 
 echo "<span id='chat-logo'>"."Chat"."</span></br><hr>";
 
-  $query_1 = "SELECT * FROM users_online WHERE status = 'online' ORDER BY ID ASC";
+  $exclude= $_COOKIE["user_first_name"];
+  $query_1 = "SELECT * FROM users_online WHERE status = 'online' and first_name <> '$exclude'  ORDER BY ID ASC";
   $run = mysqli_query($connection_String,$query_1)or die(mysqli_error($connection_String));
   $userID = 0;
   while($row = mysqli_fetch_array($run)){
@@ -61,22 +63,58 @@ echo "<span id='chat-logo'>"."Chat"."</span></br><hr>";
 
     echo "<div>";
 
-    echo "<ul>";
+      echo "<ul>";
 
-    $command_query = "SELECT * FROM users_table WHERE user_fname = '$newusername'AND user_lname='$userslast_name' ";
+      $command_query = "SELECT * FROM users_table WHERE user_fname = '$newusername'AND user_lname='$userslast_name' ";
 
-    $execute_command_query = mysqli_query($connection_String,$command_query);
+      $execute_command_query = mysqli_query($connection_String,$command_query);
 
-    while($row = mysqli_fetch_assoc($execute_command_query)){
+      while($row = mysqli_fetch_assoc($execute_command_query)){
 
-    if($row["Profile_Picture"]==""){
-        echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'><img class='my_profile_image' src='../Profile_Pictures/default.png' height='35' width='35'/>&nbsp;&nbsp;"."<strong>".$newusername."</strong><span class='users_status_active'></span></li>";
-    }else{
-        $username_picture = $row["Profile_Picture"];
-        echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'><img class='my_profile_image' src='../Profile_Pictures/$username_picture' height='35' width='35'/>&nbsp;&nbsp;"."<strong>".$newusername."</strong><span class='users_status_active'></span></li>";
-    }
-  }
-    echo "</ul>";
+        // uread message count
+        $sender = $_COOKIE["user_first_name"];
+        $receiver = $newusername;
+        $chat_log_query = "SELECT COUNT(msg) FROM posts WHERE msg_sender ='$receiver' and sender = '$sender' and receiver = '$receiver' and status = '0' ";
+        $executing_chat_log_query = mysqli_query($connection_String,$chat_log_query);
+
+        while($count = mysqli_fetch_array($executing_chat_log_query)){
+
+          if($count[0]== 0){
+            if($row["Profile_Picture"]==""){
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/default.png' height='35' width='35'/>
+                      &nbsp;"."<strong>".$newusername."</strong>
+                      <span class='users_status_active'></span>
+                    </li>";
+            }else{
+                $username_picture = $row["Profile_Picture"];
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/$username_picture' height='35' width='35'/>
+                      &nbsp;"."<strong>".$newusername."</strong>
+                      <span class='users_status_active'></span>
+                    </li>";
+            }
+          } else{
+            if($row["Profile_Picture"]==""){
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/default.png' height='35' width='35'/>
+                      &nbsp;"."<strong>".$newusername."</strong>
+                      <span class='zero' style='color:red;'>$count[0]</span>
+                      <span class='users_status_active'></span>
+                    </li>";
+            }else{
+                $username_picture = $row["Profile_Picture"];
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/$username_picture' height='35' width='35'/>
+                      &nbsp;"."<strong>".$newusername."</strong>
+                      <span class='zero' style='color:red;'>$count[0]</span>
+                      <span class='users_status_active'></span>
+                    </li>";
+            }
+          }
+        }
+      }
+      echo "</ul>";
     echo "</div>";
   }
 
@@ -89,46 +127,83 @@ echo "<span id='chat-logo'>"."Chat"."</span></br><hr>";
     $userslast_name = $row["last_name"];
 
     echo "<div>";
+      echo "<ul>";
 
-    echo "<ul>";
+        $command_query = "SELECT * FROM users_table WHERE user_fname = '$newusername' AND user_lname='$userslast_name'";
 
-    $command_query = "SELECT * FROM users_table WHERE user_fname = '$newusername' AND user_lname='$userslast_name'";
+        $execute_command_query = mysqli_query($connection_String,$command_query);
 
-    $execute_command_query = mysqli_query($connection_String,$command_query);
+        while($row = mysqli_fetch_assoc($execute_command_query)){
 
-    while($row = mysqli_fetch_assoc($execute_command_query)){
+        // uread message count
+        $sender = $_COOKIE["user_first_name"];
+        $receiver = $newusername;
+        $chat_log_query = "SELECT COUNT(msg) FROM posts WHERE msg_sender ='$receiver' and sender = '$sender' and receiver = '$receiver' and status = '0' ";
+        $executing_chat_log_query = mysqli_query($connection_String,$chat_log_query);
 
-    if($row["Profile_Picture"]==""){
-        echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'><img class='my_profile_image' src='../Profile_Pictures/default.png' height='35' width='35'/>&nbsp;&nbsp;"."<strong>".$newusername."</strong><span class='users_status_not_active'></span></li>";
-    }else{
-        $username_picture = $row["Profile_Picture"];
-        echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'><img class='my_profile_image' src='../Profile_Pictures/$username_picture' height='35' width='35'/>&nbsp;&nbsp;"."<strong>".$newusername."</strong><span class='users_status_not_active'></span></li>";
-    }
-  }
+        while($count = mysqli_fetch_array($executing_chat_log_query)){
+          if($count[0]== 0){
+            if($row["Profile_Picture"]==""){
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/default.png' height='35' width='35'/>
+                      &nbsp;&nbsp;"."<strong>".$newusername."</strong>
+                      <span class='users_status_not_active'></span>
+                    </li>";
+            } 
+            else{
+              $username_picture = $row["Profile_Picture"];
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/$username_picture' height='35' width='35'/>
+                      &nbsp;&nbsp;"."<strong>".$newusername."</strong>
+                      <span class='users_status_not_active'></span>
+                    </li>";
+            }
+          }else{
+            if($row["Profile_Picture"]==""){
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/default.png' height='35' width='35'/>
+                      &nbsp;&nbsp;"."<strong>".$newusername."</strong>
+                      <span class='zero' style='color:red;'>$count[0]</span>
+                      <span class='users_status_not_active'></span>
+                    </li>";
+            } 
+            else{
+              $username_picture = $row["Profile_Picture"];
+              echo "<li class='users' id='$userID' name='$newusername' alt='$userslast_name'>
+                      <img class='my_profile_image' src='../Profile_Pictures/$username_picture' height='35' width='35'/>
+                      &nbsp;&nbsp;"."<strong>".$newusername."</strong>
+                      <span class='zero' style='color:red;'>$count[0]</span>
+                      <span class='users_status_not_active'></span>
+                    </li>";
+            }
+          }
+        
+        }
+      }
     echo "</ul>";
-    echo "</div>";
+  echo "</div>";
   }
 
  ?>
 
 <script type="text/javascript">
   $(document).ready(function(){
-  $(".users").click(function(){
-  var idvalue = $(this).attr('id');
-  var userclicked = $(this).attr('name');
-  var lastname = $(this).attr('alt');
-    $(function(){
-      $.ajax({
-        type: "POST",
-        url: 'Chatting.php',
-        data: ({userID:idvalue,
-                username:userclicked,
-                userslast_name:lastname}),
-        success: function(data) {
-        }
+    $(".users").click(function(){
+    var idvalue = $(this).attr('id');
+    var userclicked = $(this).attr('name');
+    var lastname = $(this).attr('alt');
+      $(function(){
+        $.ajax({
+          type: "POST",
+          url: 'Chatting.php',
+          data: ({userID:idvalue,
+            username:userclicked,
+            userslast_name:lastname}),
+          success: function(data) {
+          }
+        });
       });
-    });
 
-  });
+    });
   });
 </script>
